@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+Came from: <%= session[:previous] %>
+
+<p>
+  <b>Filename:</b>
+  <%= @pic.filename %><br>
+	<%= link_to image_tag("/set1/#{@pic.filename}.jpg", :border => 0), :controller => 'pics', :action => 'browse', :id => @pic.id %>
+
+</p>
+
+
+<%= link_to 'Edit', edit_pic_path(@pic) %> |
+<%= link_to 'Back', pics_path %>

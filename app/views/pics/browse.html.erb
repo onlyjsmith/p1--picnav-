@@ -1,0 +1,19 @@
+Came from pic.id = <%= @pic.id %>, which looks like this: <%= image_tag "/set1/#{@pic.filename}.jpg", :border => 1%><br>
+
+<% session[:previous] = @pic.id %>
+
+<%= puts "Params: " + params.to_s %>
+
+<table>
+	<tr><th>Images</th></tr>
+	<tr>
+		<% @other_pics.each do |o| %>
+		<td>
+		<%= link_to image_tag("/set1/#{o.filename}.jpg"), :controller => 'pics', :action => 'build_link', :id => o.id %>
+		
+		</td>
+		<% end %>
+	</tr>
+</table>
+
+(Number of images = <%= @other_pics.size %>)
