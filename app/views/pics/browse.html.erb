@@ -1,4 +1,5 @@
-Came from pic.id = <%= @pic.id %>, which looks like this: <%= image_tag "/set1/#{@pic.filename}.jpg", :border => 1%><br>
+Came from pic.id = <%= @pic.id %>, which looks like this: <br>
+<%= image_tag "/set1/#{@pic.filename}.jpg", :border => 1%><br>
 
 <% session[:previous] = @pic.id %>
 
@@ -6,11 +7,21 @@ Came from pic.id = <%= @pic.id %>, which looks like this: <%= image_tag "/set1/#
 
 <table>
 	<tr><th>Images</th></tr>
+	<% c = 0 %>
+	<tr>
+		<% @other_pics.each do |other| %>
+		<td>
+		<%  o = Pic.find(other.to_pic) %>	
+		<%= link_to image_tag("/set1/#{o.filename}.jpg"), :controller => 'pics', :action => 'build_link', :id => o.id %>
+		
+		</td>
+		<% if c > @max_table_width then puts c else c+=1 end%>
+		<% end %>
+	</tr>
 	<tr>
 		<% @other_pics.each do |o| %>
 		<td>
-		<%= link_to image_tag("/set1/#{o.filename}.jpg"), :controller => 'pics', :action => 'build_link', :id => o.id %>
-		
+		<%= link_to 'Detail', o %>			
 		</td>
 		<% end %>
 	</tr>

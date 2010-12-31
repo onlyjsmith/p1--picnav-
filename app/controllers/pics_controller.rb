@@ -83,10 +83,14 @@ class PicsController < ApplicationController
   
   def browse
     @pic = Pic.find(params[:id]) 
-    @other_pics = Pic.all
+    # @other_pics = Pic.find(:all, :order => 'weight DESC')
+    @other_pics = @pic.links.find(:all,  :order => 'weight DESC')
+    # @other_pics.each do |e|
+    #   puts e.pic.id.to_s + " + " + e.weight.to_s
+    # end
     # TODO - will need some proper size checking in here later (i.e. to match number of images with table dimensions)
     # puts @other_pics
-    @max_table_width = 3
+    @max_table_width = 2
     
   end
   
@@ -95,12 +99,17 @@ class PicsController < ApplicationController
     from = Pic.find(session[:previous]) 
     puts "@pic "+@pic.id.to_s
     puts "from "+from.id.to_s
-    @found ||= Link.where({:pic_id => from.id, :to_pic => @pic.id}).first
-    if @found 
-      @found.weight += 1
-      @found.save
-      else
-      Link.new(:pic_id => from.id, :to_pic => @pic.id, :weight => 1).save
+    if @pic.id == from.id
+      then
+    else
+      @found ||= Link.where({:pic_id => from.id, :to_pic => @pic.id}).first
+      if @found 
+        @found.weight += 1
+        @found.save
+        else
+        Link.new(:pic_id => from.id, :to_pic => @pic.id, :weight => 1).save
+      end
     end
+    redirect_to :controller => 'pics', :action  => 'browse', :id => @pic.id
   end
 end
