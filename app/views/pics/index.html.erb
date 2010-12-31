@@ -11,7 +11,7 @@
 <% @pics.each do |pic| %>
   <tr>
     <td><%= pic.filename %></td>
-    <td><%= link_to image_tag("/set1/#{pic.filename}.jpg"), :controller => 'pics', :action => 'browse', :id => pic.id %></td>
+    <td><%= link_to image_tag("/import/#{pic.filename}.jpg"), :controller => 'pics', :action => 'browse', :id => pic.id %></td>
     <td><%= link_to 'Edit', edit_pic_path(pic) %></td>
     <td><%= link_to 'Destroy', pic, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

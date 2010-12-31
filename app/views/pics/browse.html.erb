@@ -1,5 +1,5 @@
 Came from pic.id = <%= @pic.id %>, which looks like this: <br>
-<%= image_tag "/set1/#{@pic.filename}.jpg", :border => 1%><br>
+<!-- # <%= image_tag "/import/#{@pic.filename}.jpg", :border => 1%><br> -->
 
 <% session[:previous] = @pic.id %>
 
@@ -8,23 +8,22 @@ Came from pic.id = <%= @pic.id %>, which looks like this: <br>
 <table>
 	<tr><th>Images</th></tr>
 	<% c = 0 %>
-	<tr>
-		<% @other_pics.each do |other| %>
-		<td>
-		<%  o = Pic.find(other.to_pic) %>	
-		<%= link_to image_tag("/set1/#{o.filename}.jpg"), :controller => 'pics', :action => 'build_link', :id => o.id %>
+	<!-- <tr> -->
+		<% @other_pics.each do |o| %>
+		<!-- <td>	 -->
+		<%= link_to image_tag("/import/#{o.filename}.jpg"), :controller => 'pics', :action => 'build_link', :id => o.id %>
 		
-		</td>
+		<!-- </td> -->
 		<% if c > @max_table_width then puts c else c+=1 end%>
 		<% end %>
-	</tr>
-	<tr>
+	<!-- </tr> -->
+	<!-- <tr> -->
 		<% @other_pics.each do |o| %>
-		<td>
-		<%= link_to 'Detail', o %>			
-		</td>
+		<!-- <td> -->
+		<!-- <%= link_to 'Detail', o %>	 -->
+		<!-- </td> -->
 		<% end %>
-	</tr>
+	<!-- </tr> -->
 </table>
 
 (Number of images = <%= @other_pics.size %>)

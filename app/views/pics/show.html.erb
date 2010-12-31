@@ -5,7 +5,7 @@ Came from: <%= session[:previous] %>
 <p>
   <b>Filename:</b>
   <%= @pic.filename %><br>
-	<%= link_to image_tag("/set1/#{@pic.filename}.jpg", :border => 0), :controller => 'pics', :action => 'browse', :id => @pic.id %>
+	<%= link_to image_tag("/import/#{@pic.filename}.jpg", :border => 0), :controller => 'pics', :action => 'browse', :id => @pic.id %>
 
 </p>
 

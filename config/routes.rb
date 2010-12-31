@@ -1,8 +1,10 @@
 P1::Application.routes.draw do
   resources :links
 
+  match 'pics/import' => 'pics#import'
   match 'pics/browse' => 'pics#browse'
   match 'pics/build_link/:id' => 'pics#build_link'
+  
   resources :pics
   
 
@@ -55,7 +57,7 @@ P1::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  root :to => "pics#index"
 
   # See how all your routes lay out with "rake routes"
 

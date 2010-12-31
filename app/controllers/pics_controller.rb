@@ -84,7 +84,19 @@ class PicsController < ApplicationController
   def browse
     @pic = Pic.find(params[:id]) 
     # @other_pics = Pic.find(:all, :order => 'weight DESC')
-    @other_pics = @pic.links.find(:all,  :order => 'weight DESC')
+    links = @pic.links.find(:all,  :order => 'weight DESC')
+    @other_pics = []
+    links.each do |l|
+      @other_pics << Pic.find(params[:id])
+    end
+    # debugger
+    
+    
+    if @other_pics.size < 20 then 
+      Pic.all.each do |p|
+        @other_pics << p
+      end
+    end
     # @other_pics.each do |e|
     #   puts e.pic.id.to_s + " + " + e.weight.to_s
     # end
@@ -111,5 +123,20 @@ class PicsController < ApplicationController
       end
     end
     redirect_to :controller => 'pics', :action  => 'browse', :id => @pic.id
+  end
+  
+  def import
+    basedir = "#{RAILS_ROOT}/public/import/"
+    Dir.new(basedir).entries.each do |file|
+      if File.directory? file
+      else
+        # puts file
+        start = file.split('.')[0]
+        if Pic.find_by_filename(start).blank?
+          Pic.new(:filename => start).save
+        else
+        end
+      end
+    end
   end
 end

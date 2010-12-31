@@ -2,12 +2,14 @@
 
 <p>
   <b>From pic:</b>
-  <%= @link.pic_id %>
+  <%= @link.pic_id %><br>
+	<%= image_tag "/import/#{Pic.find(@link.pic_id).filename}.jpg", :border => 1%>
 </p>
 
 <p>
   <b>To pic:</b>
-  <%= @link.to_pic %>
+  <%= @link.to_pic %><br>
+	<%= image_tag "/import/#{Pic.find(@link.to_pic).filename}.jpg", :border => 1%>
 </p>
 
 <p>
